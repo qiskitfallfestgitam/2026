@@ -1,170 +1,610 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qiskit Fall Fest 2026 | GITAM</title>
+<meta name="description" content="Qiskit Fall Fest 2026 at GITAM University — talks, hands-on quantum computing labs, and a hackathon for students of every branch.">
 
-  <title>Qiskit Fall Fest 2026 | GITAM Bengaluru</title>
+<!-- Bootstrap 5.3 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Bootstrap 5 CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      background: #050505;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
+<style>
+/* =============================================================
+   BRAND TOKENS — mapped onto Bootstrap's own CSS variable API
+   so the rest of the page can lean on stock Bootstrap classes
+   ============================================================= */
+:root{
+  --pink:#ec6ea3;
+  --pink-deep:#d9498a;
+  --violet:#5b3fc4;
+  --violet-deep:#2d1b54;
+  --violet-pale:#b6a4f2;
+  --ink:#241245;
+  --ink-soft:#584d82;
+  --ink-dim:#8781ab;
+  --bg:#dde3fb;
+  --bg-soft:#eef1fd;
+  --line:rgba(36,18,69,.12);
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background:
-        radial-gradient(circle at top, #24105f 0%, #0b0618 45%, #050505 100%);
-      padding: 40px 20px;
-    }
+  --bs-body-bg:var(--bg);
+  --bs-body-color:var(--ink);
+  --bs-body-font-family:'Inter',sans-serif;
+  --bs-link-color:var(--violet-deep);
+  --bs-link-hover-color:var(--pink-deep);
+  --bs-border-color:var(--line);
+  --bs-border-radius:18px;
+  --bs-border-radius-lg:24px;
+  --bs-border-radius-xl:26px;
+  --bs-primary:var(--violet);
+  --bs-primary-rgb:91,63,196;
+  --bs-secondary:var(--pink);
+  --bs-secondary-rgb:236,110,163;
+}
 
-    .hero h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 800;
-      background: linear-gradient(90deg, #8b5cf6, #c084fc, #22d3ee);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+html{ scroll-behavior:smooth; }
+body{ overflow-x:hidden; }
+::selection{ background:var(--pink); color:#fff; }
 
-    .hero h2 {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      font-weight: 600;
-    }
+h1,h2,h3{ font-family:'Poppins',sans-serif; font-weight:600; letter-spacing:-0.01em; color:var(--violet-deep); }
+.font-mono{ font-family:'IBM Plex Mono',monospace; }
 
-    .hero p {
-      color: #cfcfcf;
-      max-width: 700px;
-      margin: 20px auto;
-      font-size: 1.15rem;
-    }
+.text-ink-soft{ color:var(--ink-soft) !important; }
+.text-ink-dim{ color:var(--ink-dim) !important; }
 
-    .btn-quantum {
-      background: linear-gradient(90deg, #7c3aed, #2563eb);
-      border: none;
-      color: white;
-      padding: 13px 30px;
-      border-radius: 30px;
-      font-weight: 600;
-      transition: 0.3s;
-    }
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.02em;
+  color:var(--pink-deep); display:inline-flex; align-items:center; gap:8px; font-weight:500;
+}
+.eyebrow::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--pink); flex-shrink:0; }
 
-    .btn-quantum:hover {
-      transform: translateY(-3px);
-      color: white;
-      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
-    }
+.section-py{ padding-top:6.5rem; padding-bottom:6.5rem; }
+@media(max-width:576px){ .section-py{ padding-top:4rem; padding-bottom:4rem; } }
 
-    .badge-event {
-      display: inline-block;
-      padding: 8px 18px;
-      border: 1px solid #8b5cf6;
-      border-radius: 30px;
-      color: #c4b5fd;
-      margin-bottom: 20px;
-    }
+/* ===== skip link ===== */
+.skip-link{ position:absolute; left:-999px; top:0; z-index:2000; background:var(--violet-deep); color:#fff; padding:.6rem 1rem; border-radius:0 0 8px 0; }
+.skip-link:focus{ left:0; }
 
-    .footer {
-      color: #888;
-      font-size: 0.9rem;
-    }
-  </style>
+/* ===== navbar ===== */
+.site-navbar{
+  background:rgba(238,241,253,.82);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s ease, background .3s ease;
+}
+.site-navbar.scrolled{ background:rgba(238,241,253,.94); box-shadow:0 8px 24px rgba(45,27,84,.08); }
+.site-navbar .nav-link{ color:var(--ink-soft); font-weight:500; font-size:.9rem; position:relative; }
+.site-navbar .nav-link::after{
+  content:""; position:absolute; left:0; bottom:-2px; width:100%; height:2px;
+  background:var(--pink); border-radius:2px; transform:scaleX(0); transform-origin:right;
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+}
+.site-navbar .nav-link:hover{ color:var(--violet-deep); }
+.site-navbar .nav-link:hover::after{ transform:scaleX(1); transform-origin:left; }
+
+.logo-circle{ width:44px; height:44px; border-radius:50%; overflow:hidden; background:var(--violet-deep); flex-shrink:0; transition:transform .5s cubic-bezier(.22,1,.36,1); }
+.navbar-brand:hover .logo-circle{ transform:rotate(360deg) scale(1.08); }
+.logo-slot{ width:44px; height:44px; border-radius:50%; border:1.5px dashed var(--ink-dim); overflow:hidden; background:rgba(255,255,255,.5); flex-shrink:0; }
+
+/* ===== buttons — themed via Bootstrap's own button CSS variables ===== */
+.btn-fest-pink{
+  --bs-btn-color:#fff; --bs-btn-bg:var(--pink); --bs-btn-border-color:var(--pink);
+  --bs-btn-hover-color:#fff; --bs-btn-hover-bg:var(--pink-deep); --bs-btn-hover-border-color:var(--pink-deep);
+  --bs-btn-active-bg:var(--pink-deep); --bs-btn-active-border-color:var(--pink-deep);
+  font-family:'IBM Plex Mono',monospace; font-weight:500; border-radius:40px; padding:.85rem 1.7rem;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn-fest-pink:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(217,73,138,.35); }
+
+.btn-fest-ghost{
+  --bs-btn-color:var(--violet-deep); --bs-btn-bg:#fff; --bs-btn-border-color:var(--line);
+  --bs-btn-hover-color:var(--violet-deep); --bs-btn-hover-bg:#fff; --bs-btn-hover-border-color:var(--violet);
+  font-family:'IBM Plex Mono',monospace; font-weight:500; border-radius:40px; padding:.85rem 1.7rem;
+  transition:transform .18s ease;
+}
+.btn-fest-ghost:hover{ transform:translateY(-2px); }
+
+.btn-fest-dark{
+  --bs-btn-color:#fff; --bs-btn-bg:var(--violet-deep); --bs-btn-border-color:var(--violet-deep);
+  --bs-btn-hover-color:#fff; --bs-btn-hover-bg:var(--violet); --bs-btn-hover-border-color:var(--violet);
+  font-family:'IBM Plex Mono',monospace; font-weight:500; border-radius:40px;
+  transition:transform .18s ease;
+}
+.btn-fest-dark:hover{ transform:translateY(-2px); }
+
+.link-fest{
+  font-family:'IBM Plex Mono',monospace; font-size:.85rem; color:var(--violet-deep); font-weight:500;
+  display:inline-flex; align-items:center; gap:8px; border-bottom:1.5px solid var(--pink);
+  padding-bottom:2px; transition:gap .2s;
+}
+.link-fest:hover{ gap:12px; color:var(--violet-deep); }
+
+/* ===== hero ===== */
+.hero-section{ position:relative; padding-top:150px; overflow:hidden; min-height:100vh; }
+.hero-bg-img{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+.hero-veil{
+  position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(180deg, rgba(221,227,251,.35) 0%, rgba(221,227,251,.55) 55%, rgba(221,227,251,.92) 100%);
+}
+.hero-badge-circle{ width:96px; height:96px; box-shadow:0 12px 34px rgba(45,27,84,.28); }
+.hero-gitam-circle{ width:96px; height:96px; background:rgba(255,255,255,.55); }
+
+.hero-image-wrap{
+  position:relative; border-radius:36px; overflow:hidden; isolation:isolate;
+  box-shadow:0 30px 60px rgba(45,27,84,.3); border:1px solid rgba(255,255,255,.5); aspect-ratio:4/5; max-width:460px;
+}
+.hero-image-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+.hero-image-wrap::after{ content:""; position:absolute; inset:0; border-radius:36px; box-shadow:inset 0 0 0 2px rgba(236,110,163,.3); pointer-events:none; }
+
+.sticker{ position:absolute; z-index:1; filter:drop-shadow(0 10px 20px rgba(45,27,84,.18)); animation:bob 6s ease-in-out infinite; }
+@keyframes bob{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-14px);} }
+.sticker-entangle{ width:80px; top:14%; left:4%; animation-delay:0s; }
+.sticker-wave{ width:76px; top:20%; right:5%; animation-delay:1.4s; }
+
+/* ===== decorative section backgrounds ===== */
+.bg-section{ position:relative; overflow:hidden; isolation:isolate; }
+.bg-section .section-bg-img{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
+.bg-section .section-veil{
+  position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(180deg, rgba(221,227,251,.85) 0%, rgba(221,227,251,.94) 100%);
+}
+.bg-section.dark-veil .section-veil{ background:linear-gradient(160deg, rgba(45,27,84,.72) 0%, rgba(91,63,196,.68) 100%); }
+.bg-section.dark-veil h2{ color:#fff; }
+.bg-section.dark-veil .eyebrow{ color:#ffd9ec; }
+.bg-section.dark-veil .eyebrow::before{ background:#ffd9ec; }
+.bg-section.dark-veil p{ color:#e9e3fb; }
+.bg-section.alt-surface{ background:var(--bg-soft); }
+
+.gate-mark{ width:40px; height:40px; border-radius:50%; overflow:hidden; box-shadow:0 6px 16px rgba(45,27,84,.2); }
+
+.section-copy{
+  background:rgba(255,255,255,.86); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line); border-radius:24px; padding:2.4rem clamp(22px,4vw,46px);
+  box-shadow:0 20px 46px rgba(45,27,84,.14); max-width:620px;
+}
+.bg-section.dark-veil .section-copy{ background:rgba(36,18,69,.5); border-color:rgba(255,255,255,.16); box-shadow:0 20px 46px rgba(0,0,0,.28); }
+
+.align-left .section-copy{ margin-right:auto; text-align:left; }
+.align-right .section-copy{ margin-left:auto; text-align:right; }
+.align-center .section-copy{ margin-left:auto; margin-right:auto; text-align:center; }
+.align-right .eyebrow{ justify-content:flex-end; }
+.align-center .eyebrow{ justify-content:center; }
+.align-right .link-fest{ margin-left:auto; }
+.align-center .link-fest{ margin-left:auto; margin-right:auto; }
+@media(max-width:768px){
+  .align-left .section-copy, .align-right .section-copy, .align-center .section-copy{ text-align:left; margin-left:0; margin-right:0; }
+  .align-right .eyebrow, .align-center .eyebrow{ justify-content:flex-start; }
+  .align-right .link-fest, .align-center .link-fest{ margin-left:0; margin-right:0; }
+}
+
+/* ===== cards ===== */
+.card-fest{
+  border:1px solid var(--line); border-radius:18px; padding:1.6rem; background:#fff; height:100%;
+  transition:border-color .2s, transform .2s, box-shadow .2s;
+}
+.card-fest:hover{ border-color:var(--violet-pale); transform:translateY(-4px); box-shadow:0 16px 34px rgba(45,27,84,.1); }
+.card-fest .tag{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--pink-deep); font-weight:500; }
+.card-fest h3{ font-size:1.05rem; }
+.card-fest p{ color:var(--ink-soft); font-size:.92rem; margin-bottom:0; }
+
+.placeholder-slot{
+  border:1.5px dashed var(--ink-dim); border-radius:14px; background:var(--bg-soft);
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  font-family:'IBM Plex Mono',monospace; font-size:.65rem; color:var(--ink-dim); padding:.75rem;
+}
+.speaker-photo{ aspect-ratio:1/1; }
+.gallery-slot{ aspect-ratio:4/3; }
+.gallery-featured{ border-radius:14px; overflow:hidden; border:1px solid var(--line); height:100%; min-height:220px; }
+.gallery-featured img{ width:100%; height:100%; object-fit:cover; display:block; }
+.venue-map-slot{ aspect-ratio:4/3; }
+
+/* ===== info list ===== */
+.info-list .list-group-item{ background:transparent; border-color:var(--line); padding:1.1rem 0; }
+.bg-section.dark-veil .info-list .list-group-item{ border-color:rgba(255,255,255,.16); }
+.info-key{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--pink-deep); font-weight:500; min-width:150px; }
+.bg-section.dark-veil .info-key{ color:#ffb3d3; }
+.info-val{ color:var(--ink-soft); font-size:.95rem; }
+.bg-section.dark-veil .info-val{ color:#e9e3fb; }
+
+/* ===== register CTA ===== */
+.register-panel{ position:relative; border-radius:26px; overflow:hidden; isolation:isolate; padding:5rem 2.5rem; }
+.register-bg-img{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
+.register-veil{ position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg, rgba(45,27,84,.62), rgba(45,27,84,.82)); }
+.register-panel .eyebrow{ color:#ffb3d3; justify-content:center; }
+.register-panel .eyebrow::before{ background:#ffb3d3; }
+
+/* ===== contact ===== */
+.contact-sticker{ position:absolute; width:100px; right:1rem; top:1rem; opacity:.9; }
+
+/* ===== footer ===== */
+.footer-badge, .footer-gitam-slot{ width:56px; height:56px; border-radius:50%; overflow:hidden; }
+
+/* ===== scroll reveal ===== */
+.fade-in{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+.fade-in.visible{ opacity:1; transform:translateY(0); }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+/* ===== decorative center spine (desktop only) ===== */
+.spine{
+  position:absolute; left:50%; top:0; bottom:0; width:2px;
+  background:linear-gradient(180deg, transparent 0%, var(--line) 8%, var(--line) 92%, transparent 100%);
+  display:none; pointer-events:none;
+}
+@media(min-width:1200px){ .spine{ display:block; } }
+</style>
 </head>
-
 <body>
+<a class="skip-link font-mono" href="#main-content">Skip to content</a>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
+<!-- ===== HEADER / NAVBAR ===== -->
+<header class="site-navbar fixed-top" id="siteHeader">
+  <nav class="navbar navbar-expand-lg py-2">
+    <div class="container-fluid px-3 px-lg-5">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+        <span class="logo-circle d-flex align-items-center justify-content-center">
+          <img src="assets/badge-dark.png" class="w-100 h-100" style="object-fit:contain;" alt="Qiskit Fall Fest 2026 badge">
+        </span>
+        <span style="font-family:'Poppins',sans-serif; font-weight:600; font-size:.95rem; color:var(--violet-deep); line-height:1.15;">
+          Qiskit Fall Fest
+          <span class="d-block font-mono fw-normal" style="font-size:.6rem; color:var(--ink-soft);">2026 · GITAM</span>
+        </span>
+      </a>
 
-      <div class="badge-event">
-        ⚛️ Qiskit Fall Fest 2026
-      </div>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <h1>Welcome to Qiskit Fall Fest 2026</h1>
-
-      <h2>GITAM Bengaluru</h2>
-
-      <p>
-        Explore the world of quantum computing, learn with Qiskit,
-        connect with fellow enthusiasts, and build the future of
-        quantum technology together.
-      </p>
-
-      <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
-        <a href="#" class="btn btn-quantum">
-          Register Now
-        </a>
-
-        <a href="#about" class="btn btn-outline-light rounded-pill px-4 py-3">
-          Explore Event
-        </a>
-      </div>
-
-      <!-- Event Info -->
-      <div class="row justify-content-center mt-5 g-3">
-
-        <div class="col-md-3">
-          <div class="p-3 border border-secondary rounded-4">
-            <h5>⚛️ Quantum</h5>
-            <small>Learn & Explore</small>
-          </div>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav mx-lg-auto gap-lg-4 mt-3 mt-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#info">Info</a></li>
+          <li class="nav-item"><a class="nav-link" href="#schedule">Schedule</a></li>
+          <li class="nav-item"><a class="nav-link" href="#speakers">Speakers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#glimpse">Glimpse</a></li>
+          <li class="nav-item"><a class="nav-link" href="#venue">Venue</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+          <span class="logo-slot d-none d-sm-flex align-items-center justify-content-center">
+            <img src="assets/gitam-logo.png" class="w-100 h-100" style="object-fit:cover; border-radius:50%;" alt="GITAM University">
+          </span>
+          <a href="register.html" class="btn btn-fest-dark btn-sm">Register →</a>
         </div>
-
-        <div class="col-md-3">
-          <div class="p-3 border border-secondary rounded-4">
-            <h5>💻 Qiskit</h5>
-            <small>Build & Experiment</small>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="p-3 border border-secondary rounded-4">
-            <h5>🤝 Community</h5>
-            <small>Connect & Collaborate</small>
-          </div>
-        </div>
-
       </div>
-
-      <p class="footer mt-5 mb-0">
-        GITAM Bengaluru • Qiskit Fall Fest 2026
-      </p>
-
     </div>
-  </section>
+  </nav>
+</header>
 
-  <!-- About Section -->
-  <section id="about" class="py-5 bg-dark">
-    <div class="container text-center py-5">
+<!-- ===== HERO ===== -->
+<section class="hero-section d-flex align-items-center" id="hero">
+  <img class="hero-bg-img" src="assets/hero-bg.png" alt="">
+  <div class="hero-veil"></div>
 
-      <h2 class="fw-bold mb-4">About Qiskit Fall Fest</h2>
+  <div class="sticker sticker-entangle d-none d-md-block"><img src="assets/Text_Quantum_02.png" class="w-100" alt="Entanglement icon"></div>
+  <div class="sticker sticker-wave d-none d-md-block"><img src="assets/Qiskit.png" class="w-100" alt="Wave function icon"></div>
 
-      <p class="text-secondary mx-auto" style="max-width: 750px;">
-        Qiskit Fall Fest is a community-driven celebration of quantum
-        computing. Join us at GITAM Bengaluru for an exciting experience
-        featuring learning sessions, hands-on activities, workshops,
-        networking, and opportunities to explore the quantum future.
-      </p>
+  <div class="container py-5">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <div class="d-flex align-items-center justify-content-center justify-content-lg-start gap-3 mb-4">
+          <div class="hero-badge-circle rounded-circle overflow-hidden">
+            <img src="assets/badge-dark.png" class="w-100 h-100" style="object-fit:cover;" alt="Qiskit Fall Fest 2026 badge">
+          </div>
+          <span class="font-mono text-ink-dim">×</span>
+          <div class="hero-gitam-circle rounded-circle d-flex align-items-center justify-content-center overflow-hidden">
+            <img src="assets/gitam-logo.png" class="w-100 h-100" style="object-fit:cover;" alt="GITAM University">
+          </div>
+        </div>
 
+        <h1 style="font-size:clamp(2.5rem,6.6vw,4.6rem); line-height:1.05;">
+          Qiskit Fall Fest <span style="color:var(--pink-deep);">2026</span>
+        </h1>
+        <p class="text-ink-soft mt-3 mx-auto mx-lg-0" style="font-size:clamp(1rem,1.6vw,1.15rem); max-width:560px;">
+          Where quantum computing meets the mathematics that makes it possible. Days of talks, hands-on labs, and circuits — for students curious about the next computing paradigm.
+        </p>
+        <p class="font-mono text-ink-soft mt-3" style="font-size:.8rem;">
+          📍 GITAM University &nbsp;|&nbsp; 🗓 Dates to be announced &nbsp;|&nbsp; Open to all branches
+        </p>
+
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-4">
+          <a href="register.html" class="btn btn-fest-pink">Register Now →</a>
+          <a href="#schedule" class="btn btn-fest-ghost">View Schedule</a>
+        </div>
+      </div>
+
+      <div class="col-lg-5 d-flex justify-content-center">
+        <div class="hero-image-wrap">
+          <img src="assets/theme1.png" alt="Quantum circuit visualization">
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Bootstrap JS -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-  </script>
+<main id="main-content" class="position-relative">
+<div class="spine"></div>
+
+<!-- ===== IMPORTANT INFORMATION ===== -->
+<section class="bg-section section-py align-left" id="info">
+  <img class="section-bg-img" src="assets/bg-info.jpg" alt="">
+  <div class="section-veil"></div>
+
+  <div class="container position-relative" style="z-index:2;">
+    <div class="gate-mark mx-auto mb-4 d-none d-xl-block"><img src="assets/icon-mono-black.png" class="w-100 h-100" alt=""></div>
+
+    <div class="section-copy fade-in mb-5">
+      <div class="eyebrow mb-2">|info⟩</div>
+      <h2 class="fs-2">Important Information</h2>
+      <p class="text-ink-soft mt-2 mb-0">The essentials before you plan your visit — full details, FAQs and policies live on the info page.</p>
+    </div>
+
+    <ul class="list-group list-group-flush info-list fade-in mb-4">
+      <li class="list-group-item d-flex flex-wrap gap-2 align-items-baseline">
+        <span class="info-key">Eligibility</span>
+        <span class="info-val">Open to all undergraduate &amp; postgraduate students — no prior quantum computing experience required.</span>
+      </li>
+      <li class="list-group-item d-flex flex-wrap gap-2 align-items-baseline">
+        <span class="info-key">Team size</span>
+        <span class="info-val">Individual or teams of up to 4, depending on the track.</span>
+      </li>
+      <li class="list-group-item d-flex flex-wrap gap-2 align-items-baseline">
+        <span class="info-key">What to bring</span>
+        <span class="info-val">Laptop, college ID, and a curiosity for linear algebra.</span>
+      </li>
+      <li class="list-group-item d-flex flex-wrap gap-2 align-items-baseline">
+        <span class="info-key">Fee</span>
+        <span class="info-val">Free for GITAM students; nominal fee for external participants.</span>
+      </li>
+    </ul>
+
+    <a href="info.html" class="link-fest fade-in">Read full details →</a>
+  </div>
+</section>
+
+<!-- ===== SCHEDULE ===== -->
+<section class="bg-section alt-surface dark-veil align-right section-py" id="schedule">
+  <img class="section-bg-img" src="assets/bg-schedule.jpg" alt="">
+  <div class="section-veil"></div>
+
+  <div class="container position-relative" style="z-index:2;">
+    <div class="gate-mark mx-auto mb-4 d-none d-xl-block"><img src="assets/icon-mono-gray.png" class="w-100 h-100" alt=""></div>
+
+    <div class="section-copy fade-in mb-5">
+      <div class="eyebrow mb-2">|schedule⟩</div>
+      <h2 class="fs-2">Schedule</h2>
+      <p class="mt-2 mb-0">A quick look at how the days break down. Full timings, speakers per slot, and room allocations are on the schedule page.</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 fade-in mb-4">
+      <div class="col">
+        <div class="card-fest">
+          <span class="tag d-block mb-2">DAY 01</span>
+          <h3>Foundations</h3>
+          <p>Inaugural keynote, intro to qubits &amp; gates, and the math of superposition.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card-fest">
+          <span class="tag d-block mb-2">DAY 02</span>
+          <h3>Build &amp; Explore</h3>
+          <p>Hands-on Qiskit labs, algorithm walkthroughs, and speaker sessions.</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card-fest">
+          <span class="tag d-block mb-2">DAY 03</span>
+          <h3>Compete &amp; Close</h3>
+          <p>Hackathon showdown, project showcase, and the closing ceremony.</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="schedule.html" class="link-fest fade-in">View full schedule →</a>
+  </div>
+</section>
+
+<!-- ===== SPEAKERS ===== -->
+<section class="bg-section align-center section-py" id="speakers">
+  <img class="section-bg-img" src="assets/bg-speakers.jpg" alt="">
+  <div class="section-veil"></div>
+
+  <div class="container position-relative" style="z-index:2;">
+    <div class="gate-mark mx-auto mb-4 d-none d-xl-block"><img src="assets/icon-mono-black.png" class="w-100 h-100" alt=""></div>
+
+    <div class="section-copy fade-in mb-5">
+      <div class="eyebrow mb-2">|speakers⟩</div>
+      <h2 class="fs-2">Speakers</h2>
+      <p class="text-ink-soft mt-2 mb-0">Researchers, educators and industry voices from the quantum computing community. More names to be added.</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 fade-in mb-4">
+      <div class="col">
+        <div class="card-fest text-start">
+          <div class="placeholder-slot speaker-photo mb-3">PHOTO</div>
+          <h3>Speaker Name</h3>
+          <p>Title / Affiliation</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card-fest text-start">
+          <div class="placeholder-slot speaker-photo mb-3">PHOTO</div>
+          <h3>Speaker Name</h3>
+          <p>Title / Affiliation</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card-fest text-start">
+          <div class="placeholder-slot speaker-photo mb-3">PHOTO</div>
+          <h3>Speaker Name</h3>
+          <p>Title / Affiliation</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="speakers.html" class="link-fest fade-in">Meet all speakers →</a>
+  </div>
+</section>
+
+<!-- ===== GLIMPSE OF EVENT ===== -->
+<section class="bg-section alt-surface dark-veil align-left section-py" id="glimpse">
+  <img class="section-bg-img" src="assets/bg-glimpse.jpg" alt="">
+  <div class="section-veil"></div>
+
+  <div class="container position-relative" style="z-index:2;">
+    <div class="gate-mark mx-auto mb-4 d-none d-xl-block"><img src="assets/icon-mono-gray.png" class="w-100 h-100" alt=""></div>
+
+    <div class="section-copy fade-in mb-5">
+      <div class="eyebrow mb-2">|glimpse⟩</div>
+      <h2 class="fs-2">Glimpse of the Event</h2>
+      <p class="mt-2 mb-0">Moments from past Qiskit Fall Fest editions — talks, labs, and the community that shows up for them.</p>
+    </div>
+
+    <div class="row g-3 fade-in mb-4">
+      <div class="col-md-6">
+        <div class="gallery-featured">
+          <img src="assets/badge-teaser.png" alt="Qiskit Fall Fest 2026 artwork">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row row-cols-2 g-3 h-100">
+          <div class="col"><div class="placeholder-slot gallery-slot">IMG 02</div></div>
+          <div class="col"><div class="placeholder-slot gallery-slot">IMG 03</div></div>
+          <div class="col"><div class="placeholder-slot gallery-slot">IMG 04</div></div>
+          <div class="col"><div class="placeholder-slot gallery-slot">IMG 05</div></div>
+        </div>
+      </div>
+    </div>
+
+    <a href="gallery.html" class="link-fest fade-in">See full gallery →</a>
+  </div>
+</section>
+
+<!-- ===== VENUE ===== -->
+<section class="bg-section align-right section-py" id="venue">
+  <img class="section-bg-img" src="assets/bg-venue.jpg" alt="">
+  <div class="section-veil"></div>
+
+  <div class="container position-relative" style="z-index:2;">
+    <div class="gate-mark mx-auto mb-4 d-none d-xl-block"><img src="assets/icon-mono-black.png" class="w-100 h-100" alt=""></div>
+
+    <div class="section-copy fade-in mb-5">
+      <div class="eyebrow mb-2">|venue⟩</div>
+      <h2 class="fs-2">Venue</h2>
+      <p class="text-ink-soft mt-2 mb-0">Hosted on campus at GITAM. Directions, parking, and accessibility info are on the venue page.</p>
+    </div>
+
+    <div class="row g-4 align-items-center fade-in">
+      <div class="col-lg-6">
+        <div class="placeholder-slot venue-map-slot">MAP EMBED / VENUE IMAGE PLACEHOLDER</div>
+      </div>
+      <div class="col-lg-6 text-start">
+        <p class="text-ink-soft mb-2"><strong class="text-violet-deep" style="color:var(--violet-deep);">Location —</strong> GITAM University Campus (Auditorium / Block name TBA)</p>
+        <p class="text-ink-soft mb-2"><strong style="color:var(--violet-deep);">City —</strong> To be confirmed</p>
+        <p class="text-ink-soft mb-3"><strong style="color:var(--violet-deep);">Access —</strong> Shuttle from main gate; parking available on campus</p>
+        <a href="venue.html" class="btn btn-fest-dark">Get directions →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REGISTER ===== -->
+<section class="section-py" id="register">
+  <div class="container">
+    <div class="gate-mark mx-auto mb-4 d-none d-xl-block"><img src="assets/icon-mono-gray.png" class="w-100 h-100" alt=""></div>
+
+    <div class="register-panel fade-in text-center text-white">
+      <img class="register-bg-img" src="assets/hero-bg-title.png" alt="">
+      <div class="register-veil"></div>
+      <div class="eyebrow mb-2">|register⟩</div>
+      <h2 class="text-white" style="font-size:clamp(1.7rem,3.2vw,2.4rem);">Collapse the wavefunction. Register.</h2>
+      <p class="mx-auto mt-3" style="color:#e4dcfb; max-width:520px;">Seats are limited. Secure your spot at Qiskit Fall Fest 2026 and get access to every track, lab, and session.</p>
+      <a href="register.html" class="btn btn-fest-pink mt-4">Register Now →</a>
+      <p class="font-mono mt-4 mb-0" style="font-size:.8rem; color:#ffd9ec;">Registrations open · Early access for GITAM students</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT US ===== -->
+<section class="bg-section alt-surface dark-veil align-center section-py" id="contact">
+  <img class="section-bg-img" src="assets/bg-contact.jpg" alt="">
+  <div class="section-veil"></div>
+
+  <div class="container position-relative" style="z-index:2;">
+    <img class="contact-sticker d-none d-xl-block" src="assets/sticker-bird.png" alt="">
+    <div class="gate-mark mx-auto mb-4 d-none d-xl-block"><img src="assets/icon-mono-black.png" class="w-100 h-100" alt=""></div>
+
+    <div class="section-copy fade-in mb-5">
+      <div class="eyebrow mb-2">|contact⟩</div>
+      <h2 class="fs-2">Contact Us</h2>
+      <p class="mt-2 mb-0">Questions about tracks, teams, or logistics? Reach the organizing committee.</p>
+    </div>
+
+    <div class="row g-4 fade-in text-start">
+      <div class="col-md-6">
+        <ul class="list-unstyled">
+          <li class="mb-3">
+            <span class="info-key d-block mb-1" style="min-width:auto;">Email</span>
+            <span class="info-val">fallfest@gitam.edu</span>
+          </li>
+          <li class="mb-3">
+            <span class="info-key d-block mb-1" style="min-width:auto;">Phone</span>
+            <span class="info-val">+91 00000 00000</span>
+          </li>
+          <li class="mb-3">
+            <span class="info-key d-block mb-1" style="min-width:auto;">Instagram</span>
+            <span class="info-val">@qiskitfallfest.gitam</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <p>For sponsorships, media, or campus ambassador queries, use the full contact page — it has a form and committee directory.</p>
+        <a href="contact.html" class="btn btn-fest-dark">Go to contact page →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="text-center py-5" style="background:var(--bg-soft); border-top:1px solid var(--line);">
+  <div class="d-flex justify-content-center align-items-center gap-4 mb-3">
+    <div class="footer-badge"><img src="assets/badge-dark.png" class="w-100 h-100" style="object-fit:cover;" alt="Qiskit Fall Fest 2026 badge"></div>
+    <div class="footer-gitam-slot"><img src="assets/gitam-logo.png" class="w-100 h-100" style="object-fit:contain;" alt="GITAM University"></div>
+  </div>
+  <p class="font-mono text-ink-soft mb-0" style="font-size:.75rem;">© 2026 Qiskit Fall Fest · GITAM &nbsp;|&nbsp; Organized in collaboration with the Qiskit Community</p>
+</footer>
+
+<!-- Bootstrap bundle (incl. Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // navbar background swap on scroll
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive:true });
+
+  // collapse mobile nav after a link is clicked
+  document.querySelectorAll('#mainNav .nav-link').forEach(link=>{
+    link.addEventListener('click', ()=>{
+      const nav = document.getElementById('mainNav');
+      if(nav.classList.contains('show')){
+        bootstrap.Collapse.getOrCreateInstance(nav).hide();
+      }
+    });
+  });
+
+  // scroll-reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in').forEach(el=> io.observe(el));
+</script>
 
 </body>
 </html>
