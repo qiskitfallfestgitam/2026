@@ -7,19 +7,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root{
-  --bg:#eef0f3;
-  --bg-soft:#f7f8fa;
-  --surface:#ffffff;
-  --ink:#1a1d29;
-  --ink-soft:#4b5265;
-  --ink-dim:#8991a3;
-  --pink:#3b82f6;         /* electric blue accent, replaces pink */
-  --pink-deep:#1d4ed8;
-  --violet:#334155;
-  --violet-deep:#0f172a;
-  --violet-pale:#94a3b8;
+  --bg:#0b1120;
+  --bg-soft:#111827;
+  --surface:#161f33;
+  --ink:#e6e9f2;
+  --ink-soft:#a3adc2;
+  --ink-dim:#6b7590;
+  --pink:#2dd4bf;
+  --pink-deep:#14b8a6;
+  --violet:#6366f1;
+  --violet-deep:#312e81;
+  --violet-pale:#c7d2fe;
   --blue:#38bdf8;
-  --line: rgba(26,29,41,0.1);
+  --line: rgba(255,255,255,0.1);
   --radius: 18px;
 
 
