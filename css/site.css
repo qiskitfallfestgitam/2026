@@ -7,20 +7,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root{
-  --bg:#dde3fb;
-  --bg-soft:#eef1fd;
+  --bg:#eef0f3;
+  --bg-soft:#f7f8fa;
   --surface:#ffffff;
-  --ink:#241245;
-  --ink-soft:#584d82;
-  --ink-dim:#8781ab;
-  --pink:#ec6ea3;
-  --pink-deep:#d9498a;
-  --violet:#5b3fc4;
-  --violet-deep:#2d1b54;
-  --violet-pale:#b6a4f2;
-  --blue:#7ba3f5;
-  --line: rgba(36,18,69,0.12);
+  --ink:#1a1d29;
+  --ink-soft:#4b5265;
+  --ink-dim:#8991a3;
+  --pink:#3b82f6;         /* electric blue accent, replaces pink */
+  --pink-deep:#1d4ed8;
+  --violet:#334155;
+  --violet-deep:#0f172a;
+  --violet-pale:#94a3b8;
+  --blue:#38bdf8;
+  --line: rgba(26,29,41,0.1);
   --radius: 18px;
+
 
   /* bootstrap variable overrides */
   --bs-body-font-family:'Poppins', sans-serif;
