@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glimpse · Qiskit Fall Fest 2026</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* ===== puzzle / mosaic gallery ===== */
+  .puzzle-grid{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    grid-auto-rows:110px;
+    gap:14px;
+  }
+  .puzzle-piece{
+    position:relative;
+    border-radius:22px;
+    overflow:hidden;
+    isolation:isolate;
+    box-shadow:0 10px 26px rgba(45,27,84,0.14);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .puzzle-piece:hover{ transform:translateY(-6px) scale(1.015); box-shadow:0 22px 42px rgba(45,27,84,0.24); z-index:3; }
+  .puzzle-piece img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .puzzle-piece::before{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(200deg, transparent 55%, rgba(36,18,69,0.55));
+  }
+  .puzzle-caption{
+    position:absolute; left:16px; right:16px; bottom:14px; z-index:2;
+    color:#fff;
+  }
+  .puzzle-caption .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.66rem; color:#ffd9ec; display:block; margin-bottom:3px;
+  }
+  .puzzle-caption .title{ font-weight:600; font-size:0.92rem; line-height:1.25; }
+
+  /* interlocking "puzzle" spans — irregular but tessellating */
+  .p-a{ grid-column:span 3; grid-row:span 2; }
+  .p-b{ grid-column:span 3; grid-row:span 3; }
+  .p-c{ grid-column:span 3; grid-row:span 1; }
+  .p-d{ grid-column:span 2; grid-row:span 2; }
+  .p-e{ grid-column:span 2; grid-row:span 2; }
+  .p-f{ grid-column:span 2; grid-row:span 2; }
+  .p-g{ grid-column:span 4; grid-row:span 2; }
+  .p-h{ grid-column:span 2; grid-row:span 2; }
+  .p-i{ grid-column:span 3; grid-row:span 2; }
+  .p-j{ grid-column:span 3; grid-row:span 2; }
+
+  /* quantum-motif fills for each piece — no photos required yet */
+  .fill-1{ background:radial-gradient(circle at 30% 30%, #7f5ce0, #2d1b54 75%); }
+  .fill-2{ background:radial-gradient(circle at 70% 30%, #ec6ea3, #5b3fc4 70%); }
+  .fill-3{ background:linear-gradient(135deg, #2d1b54, #5b3fc4 60%, #7ba3f5); }
+  .fill-4{ background:radial-gradient(circle at 50% 50%, #b6a4f2, #2d1b54 80%); }
+  .fill-5{ background:linear-gradient(160deg, #d9498a, #2d1b54 70%); }
+  .fill-6{ background:radial-gradient(circle at 40% 60%, #7ba3f5, #241245 75%); }
+  .fill-7{ background:linear-gradient(135deg, #241245, #5b3fc4 55%, #ec6ea3); }
+  .fill-8{ background:radial-gradient(circle at 60% 40%, #ec6ea3, #241245 70%); }
+  .fill-9{ background:linear-gradient(150deg, #5b3fc4, #241245 65%, #b6a4f2); }
+  .fill-10{ background:radial-gradient(circle at 35% 65%, #7f5ce0, #d9498a 70%, #2d1b54); }
+
+  /* faint circuit-line overlay to tie every tile to the quantum theme */
+  .qcircuit{
+    position:absolute; inset:0; z-index:0; opacity:0.35;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.35) 0 1px, transparent 1px 46px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.18) 0 1px, transparent 1px 46px);
+  }
+
+  @media (max-width:900px){
+    .puzzle-grid{ grid-template-columns:repeat(2, 1fr); grid-auto-rows:150px; }
+    .p-a,.p-b,.p-c,.p-d,.p-e,.p-f,.p-g,.p-h,.p-i,.p-j{ grid-column:span 1; grid-row:span 2; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-box">
+    <div class="logo-img-wrap" title="Fall Fest badge">
+      <img src="assets/badge-dark.png" alt="Qiskit Fall Fest 2026 badge">
+    </div>
+    <div class="brand-text">
+      Qiskit Fall Fest
+      <span>2026 · GITAM</span>
+    </div>
+  </div>
+
+  <nav class="qf-nav" id="qfNav">
+    <a href="info.html">Info</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="speakers.html">Speakers</a>
+    <a href="glimpse.html" class="active">Glimpse</a>
+    <a href="venue.html">Venue</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="header-right">
+    <button class="qf-toggler" id="qfToggler" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="logo-slot-wrap"><img src="assets/gitam-logo.png" alt="GITAM University" style="width:100%;height:100%;object-fit:cover;"></div>
+    <a href="register.html" class="btn-nav-register">Register →</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="eyebrow">|glimpse⟩</div>
+  <h1>Moments from the fest</h1>
+  <p>Talks, labs, and the community that shows up for them — pieced together like the circuits we build.</p>
+</section>
+
+<section class="qf-section">
+  <div class="puzzle-grid">
+
+    <div class="puzzle-piece p-a">
+      <div class="qcircuit fill-1"></div>
+      <img src="assets/glimpse-01.jpg" alt="Opening keynote on the main stage" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">|0⟩ → keynote</span><span class="title">Opening keynote</span></div>
+    </div>
+
+    <div class="puzzle-piece p-b">
+      <div class="qcircuit fill-2"></div>
+      <img src="assets/glimpse-02.jpg" alt="Students building their first quantum circuit" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">lab session</span><span class="title">First circuits, first bugs</span></div>
+    </div>
+
+    <div class="puzzle-piece p-d">
+      <div class="qcircuit fill-3"></div>
+      <img src="assets/glimpse-03.jpg" alt="Mentor helping a team debug a circuit" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">mentoring</span><span class="title">On the lab floor</span></div>
+    </div>
+
+    <div class="puzzle-piece p-e">
+      <div class="qcircuit fill-4"></div>
+      <img src="assets/glimpse-04.jpg" alt="Team collaborating around a laptop" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">teamwork</span><span class="title">Building together</span></div>
+    </div>
+
+    <div class="puzzle-piece p-c">
+      <div class="qcircuit fill-5"></div>
+      <img src="assets/glimpse-05.jpg" alt="Close-up of a quantum circuit diagram on a whiteboard" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">whiteboard</span><span class="title">Working through the maths</span></div>
+    </div>
+
+    <div class="puzzle-piece p-f">
+      <div class="qcircuit fill-6"></div>
+      <img src="assets/glimpse-06.jpg" alt="Guest speaker giving an industry talk" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">talk</span><span class="title">Quantum in industry</span></div>
+    </div>
+
+    <div class="puzzle-piece p-g">
+      <div class="qcircuit fill-7"></div>
+      <img src="assets/glimpse-07.jpg" alt="Full room during a track breakout session" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">breakout</span><span class="title">Track sessions in full swing</span></div>
+    </div>
+
+    <div class="puzzle-piece p-h">
+      <div class="qcircuit fill-8"></div>
+      <img src="assets/glimpse-08.jpg" alt="Participant presenting a lightning demo" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">demo</span><span class="title">Lightning demos</span></div>
+    </div>
+
+    <div class="puzzle-piece p-i">
+      <div class="qcircuit fill-9"></div>
+      <img src="assets/glimpse-09.jpg" alt="Team celebrating with their award" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">awards</span><span class="title">Closing &amp; awards</span></div>
+    </div>
+
+    <div class="puzzle-piece p-j">
+      <div class="qcircuit fill-10"></div>
+      <img src="assets/glimpse-10.jpg" alt="Group photo of all participants and organizers" style="position:relative; z-index:0; mix-blend-mode:overlay; opacity:0.9;">
+      <div class="puzzle-caption"><span class="tag">community</span><span class="title">The whole crew</span></div>
+    </div>
+
+  </div>
+
+  <p class="text-center mt-5" style="color:var(--ink-dim); font-size:0.9rem;">Photos from past editions — swap each tile's image for the real moment once it happens.</p>
+</section>
+
+<footer>
+  <div class="footer-logos">
+    <div class="footer-badge"><img src="assets/badge-dark.png" alt="Qiskit Fall Fest 2026 badge"></div>
+    <div class="footer-gitam-slot"><img src="assets/gitam-logo.png" alt="GITAM University" style="width:100%;height:100%;object-fit:contain;"></div>
+  </div>
+  <p>© 2026 Qiskit Fall Fest · GITAM &nbsp;|&nbsp; Organized in collaboration with the Qiskit Community</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const qfToggler = document.getElementById('qfToggler');
+  const qfNav = document.getElementById('qfNav');
+  qfToggler.addEventListener('click', () => {
+    qfNav.classList.toggle('open');
+    qfToggler.classList.toggle('open');
+    qfToggler.setAttribute('aria-expanded', qfNav.classList.contains('open'));
+  });
+</script>
+</body>
+</html>

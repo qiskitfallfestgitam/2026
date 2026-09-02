@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team · Qiskit Fall Fest 2026</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .team-lead-card{
+    background:#fff; border:1px solid var(--line); border-radius:22px; padding:24px;
+    text-align:center; height:100%;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .team-lead-card:hover{ transform:translateY(-4px); box-shadow:0 18px 36px rgba(45,27,84,0.14); }
+  .team-lead-photo{
+    width:120px; height:120px; border-radius:50%; overflow:hidden; margin:0 auto 16px;
+    border:2.5px solid var(--violet-pale);
+  }
+  .team-lead-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .team-card{
+    background:#fff; border:1px solid var(--line); border-radius:20px; padding:20px;
+    text-align:center; height:100%;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .team-card:hover{ transform:translateY(-3px); box-shadow:0 14px 28px rgba(45,27,84,0.12); }
+  .team-photo{
+    width:84px; height:84px; border-radius:50%; overflow:hidden; margin:0 auto 12px;
+    border:2px solid var(--violet-pale);
+  }
+  .team-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  .team-tag{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    color:var(--pink-deep); background:var(--bg-soft); padding:3px 10px; border-radius:100px; margin-bottom:8px;
+  }
+  .team-group-title{
+    font-size:0.8rem; font-weight:600; letter-spacing:.02em; color:var(--ink-dim);
+    margin:56px 0 22px; padding-top:8px; border-top:1px solid var(--line);
+  }
+  .team-group-title:first-of-type{ margin-top:0; border-top:none; padding-top:0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-box">
+    <div class="logo-img-wrap" title="Fall Fest badge">
+      <img src="assets/badge-dark.png" alt="Qiskit Fall Fest 2026 badge">
+    </div>
+    <div class="brand-text">
+      Qiskit Fall Fest
+      <span>2026 · GITAM</span>
+    </div>
+  </div>
+
+  <nav class="qf-nav" id="qfNav">
+    <a href="info.html">Info</a>
+    <a href="schedule.html">Schedule</a>
+    <a href="speakers.html">Speakers</a>
+    <a href="glimpse.html">Glimpse</a>
+    <a href="venue.html">Venue</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="header-right">
+    <button class="qf-toggler" id="qfToggler" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="logo-slot-wrap"><img src="assets/gitam-logo.png" alt="GITAM University" style="width:100%;height:100%;object-fit:cover;"></div>
+    <a href="register.html" class="btn-nav-register">Register →</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="eyebrow">|team⟩</div>
+  <h1>The people behind the fest</h1>
+  <p>Students and faculty from GITAM putting this together, alongside mentors from the Qiskit community.</p>
+</section>
+
+<section class="qf-section">
+
+  <div class="team-group-title">Faculty coordinators</div>
+  <div class="row g-4 justify-content-center">
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-lead-card">
+        <div class="team-lead-photo"><img src="assets/team-faculty-01.jpg" alt="Photo of Dr. Meera Pillai"></div>
+        <h3 class="h6 mb-1">Dr. Meera Pillai</h3>
+        <p class="small mb-0" style="color:var(--ink-soft)">Faculty Coordinator, Dept. of CSE</p>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-lead-card">
+        <div class="team-lead-photo"><img src="assets/team-faculty-02.jpg" alt="Photo of Dr. Suresh Nair"></div>
+        <h3 class="h6 mb-1">Dr. Suresh Nair</h3>
+        <p class="small mb-0" style="color:var(--ink-soft)">Faculty Coordinator, Dept. of Physics</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-group-title">Core organizing team</div>
+  <div class="row g-4">
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-01.jpg" alt="Photo of Ishita Sharma"></div>
+        <span class="team-tag">Event Lead</span>
+        <h3 class="h6 mb-0">Ishita Sharma</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-02.jpg" alt="Photo of Karthik Reddy"></div>
+        <span class="team-tag">Logistics Lead</span>
+        <h3 class="h6 mb-0">Karthik Reddy</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-03.jpg" alt="Photo of Divya Menon"></div>
+        <span class="team-tag">Speakers &amp; Content</span>
+        <h3 class="h6 mb-0">Divya Menon</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-04.jpg" alt="Photo of Arjun Varma"></div>
+        <span class="team-tag">Design Lead</span>
+        <h3 class="h6 mb-0">Arjun Varma</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-05.jpg" alt="Photo of Neha Kulkarni"></div>
+        <span class="team-tag">Sponsorship Lead</span>
+        <h3 class="h6 mb-0">Neha Kulkarni</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-06.jpg" alt="Photo of Vikram Shetty"></div>
+        <span class="team-tag">Technical Lead</span>
+        <h3 class="h6 mb-0">Vikram Shetty</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-07.jpg" alt="Photo of Ananya Iyer"></div>
+        <span class="team-tag">Marketing Lead</span>
+        <h3 class="h6 mb-0">Ananya Iyer</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-core-08.jpg" alt="Photo of Rohan Das"></div>
+        <span class="team-tag">Volunteer Coordinator</span>
+        <h3 class="h6 mb-0">Rohan Das</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-group-title">Volunteers</div>
+  <div class="row g-4">
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-vol-01.jpg" alt="Photo of Sneha Rao"></div>
+        <span class="team-tag">Registrations</span>
+        <h3 class="h6 mb-0">Sneha Rao</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-vol-02.jpg" alt="Photo of Aditya Bose"></div>
+        <span class="team-tag">Lab Support</span>
+        <h3 class="h6 mb-0">Aditya Bose</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-vol-03.jpg" alt="Photo of Meghana Rao"></div>
+        <span class="team-tag">Hospitality</span>
+        <h3 class="h6 mb-0">Meghana Rao</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4 col-lg-3">
+      <div class="team-card">
+        <div class="team-photo"><img src="assets/team-vol-04.jpg" alt="Photo of Farhan Ali"></div>
+        <span class="team-tag">Stage &amp; AV</span>
+        <h3 class="h6 mb-0">Farhan Ali</h3>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-logos">
+    <div class="footer-badge"><img src="assets/badge-dark.png" alt="Qiskit Fall Fest 2026 badge"></div>
+    <div class="footer-gitam-slot"><img src="assets/gitam-logo.png" alt="GITAM University" style="width:100%;height:100%;object-fit:contain;"></div>
+  </div>
+  <p>© 2026 Qiskit Fall Fest · GITAM &nbsp;|&nbsp; Organized in collaboration with the Qiskit Community</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const qfToggler = document.getElementById('qfToggler');
+  const qfNav = document.getElementById('qfNav');
+  qfToggler.addEventListener('click', () => {
+    qfNav.classList.toggle('open');
+    qfToggler.classList.toggle('open');
+    qfToggler.setAttribute('aria-expanded', qfNav.classList.contains('open'));
+  });
+</script>
+</body>
+</html>
