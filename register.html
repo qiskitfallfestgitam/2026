@@ -103,5 +103,56 @@
     qfToggler.setAttribute('aria-expanded', qfNav.classList.contains('open'));
   });
 </script>
+
+  <script>
+  const registerBtn = document.getElementById('registerBtn');
+  const registrationModal = document.getElementById('registrationModal');
+  const redirectCountdown = document.getElementById('redirectCountdown');
+
+  registerBtn.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    const registrationUrl = this.href;
+
+    /*
+     * Open a blank tab immediately.
+     * This helps prevent the browser from blocking
+     * the new tab as a popup after the 4-second delay.
+     */
+    const newTab = window.open('about:blank', '_blank');
+
+    // Show modal
+    registrationModal.classList.add('show');
+    registrationModal.setAttribute('aria-hidden', 'false');
+
+    let seconds = 4;
+    redirectCountdown.textContent = seconds;
+
+    const countdownTimer = setInterval(() => {
+      seconds--;
+
+      redirectCountdown.textContent = seconds;
+
+      if (seconds <= 0) {
+        clearInterval(countdownTimer);
+
+        // Redirect the already-opened tab
+        if (newTab && !newTab.closed) {
+          newTab.location.href = registrationUrl;
+        } else {
+          // Fallback if the browser blocked the new tab
+          window.open(registrationUrl, '_blank');
+        }
+
+        // Close modal
+        setTimeout(() => {
+          registrationModal.classList.remove('show');
+          registrationModal.setAttribute('aria-hidden', 'true');
+        }, 300);
+      }
+    }, 1000);
+  });
+</script>
+
 </body>
 </html>
