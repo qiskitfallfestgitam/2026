@@ -160,6 +160,88 @@ footer{
 
 
 
+.registration-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(20, 15, 35, 0.72);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.registration-modal.show {
+  display: flex;
+}
+
+.registration-modal-box {
+  width: min(420px, 100%);
+  background: #fff;
+  border-radius: 20px;
+  padding: 42px 30px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  animation: registrationModalIn 0.25s ease;
+}
+
+.registration-modal-box h3 {
+  margin: 20px 0 8px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.registration-modal-box p {
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.registration-modal-box small {
+  color: var(--ink-dim);
+}
+
+.redirect-countdown {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: var(--violet-deep);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.redirect-spinner {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto;
+  border: 4px solid #e9e5f2;
+  border-top-color: var(--violet-deep);
+  border-radius: 50%;
+  animation: redirectSpin 0.8s linear infinite;
+}
+
+@keyframes redirectSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes registrationModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
 
 
 
