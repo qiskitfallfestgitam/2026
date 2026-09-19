@@ -8,6 +8,55 @@
 
 
   <style>
+
+    /* ===== registration deadline callout ===== */
+.deadline-card{
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+  background:linear-gradient(135deg, rgba(217,73,138,.08), rgba(91,63,196,.08));
+  border:1.5px solid var(--pink);
+  border-radius:20px;
+  padding:18px 28px;
+  margin-top:8px;
+  box-shadow:0 10px 28px rgba(217,73,138,.12);
+}
+.deadline-icon{
+  font-size:1.6rem;
+  flex-shrink:0;
+  animation:tick 1.8s ease-in-out infinite;
+}
+@keyframes tick{
+  0%,100%{ transform:rotate(0deg); }
+  25%{ transform:rotate(-8deg); }
+  75%{ transform:rotate(8deg); }
+}
+.deadline-text{ text-align:left; }
+.deadline-label{
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--pink-deep); font-weight:600; margin-bottom:2px;
+}
+.deadline-date{
+  font-family:'Poppins',sans-serif; font-weight:600; font-size:1.05rem; color:var(--violet-deep);
+}
+.deadline-countdown{
+  display:flex; gap:14px; margin-left:8px; padding-left:18px;
+  border-left:1px solid rgba(217,73,138,.3);
+}
+.deadline-countdown-item{ text-align:center; min-width:44px; }
+.deadline-num{
+  font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:1.15rem; color:var(--pink-deep); line-height:1;
+}
+.deadline-unit{
+  font-family:'IBM Plex Mono',monospace; font-size:.6rem; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--ink-dim); margin-top:2px;
+}
+
+@media(max-width:576px){
+  .deadline-card{ flex-direction:column; text-align:center; padding:20px; }
+  .deadline-text{ text-align:center; }
+  .deadline-countdown{ margin-left:0; padding-left:0; border-left:none; border-top:1px solid rgba(217,73,138,.3); padding-top:12px; margin-top:8px; }
+}
 /* ===== brand tokens (same palette as the homepage) ===== */
 :root{
   --pink:#ec6ea3;
@@ -324,9 +373,29 @@ footer p{ font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); font-siz
     </div>
 
     <div class="text-center fade-in">
-      <p class="font-mono mb-0" style="font-size:.85rem; color:var(--pink-deep); font-weight:600;">
-        ⏰ Last date to register: 5 October 2026, 11:59 PM
-      </p>
+     <div class="text-center fade-in">
+  <div class="deadline-card">
+    <span class="deadline-icon">⏰</span>
+    <div class="deadline-text">
+      <div class="deadline-label">Last Date to Register</div>
+      <div class="deadline-date">5 October 2026 · 11:59 PM</div>
+    </div>
+    <div class="deadline-countdown" id="deadlineCountdown" data-target="2026-10-05T23:59:59">
+      <div class="deadline-countdown-item">
+        <div class="deadline-num" id="ddDays">00</div>
+        <div class="deadline-unit">Days</div>
+      </div>
+      <div class="deadline-countdown-item">
+        <div class="deadline-num" id="ddHours">00</div>
+        <div class="deadline-unit">Hrs</div>
+      </div>
+      <div class="deadline-countdown-item">
+        <div class="deadline-num" id="ddMins">00</div>
+        <div class="deadline-unit">Min</div>
+      </div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
@@ -349,7 +418,28 @@ footer p{ font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); font-siz
     qfToggler.setAttribute('aria-expanded', qfNav.classList.contains('open'));
   });
 </script>
-
+<script>
+  const ddEl = document.getElementById('deadlineCountdown');
+  if (ddEl) {
+    const target = new Date(ddEl.getAttribute('data-target')).getTime();
+    function updateDeadline() {
+      const now = new Date().getTime();
+      const dist = target - now;
+      const daysEl = document.getElementById('ddDays');
+      const hoursEl = document.getElementById('ddHours');
+      const minsEl = document.getElementById('ddMins');
+      if (dist < 0) {
+        daysEl.textContent = '00'; hoursEl.textContent = '00'; minsEl.textContent = '00';
+        return;
+      }
+      daysEl.textContent = String(Math.floor(dist / 86400000)).padStart(2, '0');
+      hoursEl.textContent = String(Math.floor((dist % 86400000) / 3600000)).padStart(2, '0');
+      minsEl.textContent = String(Math.floor((dist % 3600000) / 60000)).padStart(2, '0');
+    }
+    updateDeadline();
+    setInterval(updateDeadline, 60000);
+  }
+</script>
  
 
 </body>
