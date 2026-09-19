@@ -5,6 +5,199 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Register · Qiskit Fall Fest 2026</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <style>
+/* ===== brand tokens (same palette as the homepage) ===== */
+:root{
+  --pink:#ec6ea3;
+  --pink-deep:#d9498a;
+  --violet:#5b3fc4;
+  --violet-deep:#2d1b54;
+  --violet-pale:#b6a4f2;
+  --ink:#241245;
+  --ink-soft:#584d82;
+  --ink-dim:#8781ab;
+  --bg:#dde3fb;
+  --bg-soft:#eef1fd;
+  --line:rgba(36,18,69,.12);
+}
+
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+h1,h2,h3{ font-family:'Poppins',sans-serif; font-weight:600; letter-spacing:-0.01em; color:var(--violet-deep); }
+.font-mono{ font-family:'IBM Plex Mono',monospace; }
+.text-ink-soft{ color:var(--ink-soft) !important; }
+.text-ink-dim{ color:var(--ink-dim) !important; }
+
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.02em;
+  color:var(--pink-deep); display:inline-flex; align-items:center; gap:8px; font-weight:500;
+}
+.eyebrow::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--pink); flex-shrink:0; }
+
+/* ===== header / nav ===== */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 32px;
+  background:rgba(238,241,253,.9);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.logo-box{ display:flex; align-items:center; gap:10px; }
+.logo-img-wrap{
+  width:44px; height:44px; border-radius:50%; overflow:hidden;
+  background:var(--violet-deep); flex-shrink:0;
+}
+.logo-img-wrap img{ width:100%; height:100%; object-fit:contain; }
+.brand-text{
+  font-family:'Poppins',sans-serif; font-weight:600; font-size:.95rem;
+  color:var(--violet-deep); line-height:1.15;
+}
+.brand-text span{
+  display:block; font-family:'IBM Plex Mono',monospace; font-weight:400;
+  font-size:.6rem; color:var(--ink-soft);
+}
+
+.qf-nav{ display:flex; align-items:center; gap:28px; }
+.qf-nav a{
+  font-family:'Inter',sans-serif; font-weight:500; font-size:.9rem;
+  color:var(--ink-soft); text-decoration:none; position:relative; padding:4px 0;
+}
+.qf-nav a::after{
+  content:""; position:absolute; left:0; bottom:-2px; width:100%; height:2px;
+  background:var(--pink); border-radius:2px; transform:scaleX(0); transform-origin:right;
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+}
+.qf-nav a:hover{ color:var(--violet-deep); }
+.qf-nav a:hover::after{ transform:scaleX(1); transform-origin:left; }
+
+.header-right{ display:flex; align-items:center; gap:16px; }
+.logo-slot-wrap{
+  width:44px; height:44px; border-radius:50%; overflow:hidden;
+  border:1.5px dashed var(--ink-dim); background:rgba(255,255,255,.5); flex-shrink:0;
+}
+
+.btn-nav-register{
+  font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:.85rem;
+  color:#fff; background:var(--pink); border:1px solid var(--pink);
+  border-radius:40px; padding:.6rem 1.3rem; text-decoration:none;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  display:inline-block; white-space:nowrap;
+}
+.btn-nav-register:hover{
+  color:#fff; background:var(--pink-deep); border-color:var(--pink-deep);
+  transform:translateY(-2px); box-shadow:0 12px 28px rgba(217,73,138,.35);
+}
+
+.qf-toggler{
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:34px; height:34px; background:none; border:none; cursor:pointer; padding:0;
+}
+.qf-toggler span{
+  display:block; width:100%; height:2px; background:var(--violet-deep);
+  border-radius:2px; transition:transform .25s ease, opacity .25s ease;
+}
+.qf-toggler.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.qf-toggler.open span:nth-child(2){ opacity:0; }
+.qf-toggler.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+@media(max-width:991px){
+  .qf-toggler{ display:flex; }
+  .qf-nav{
+    position:fixed; top:72px; left:0; right:0;
+    flex-direction:column; align-items:flex-start; gap:0;
+    background:var(--bg-soft); border-bottom:1px solid var(--line);
+    max-height:0; overflow:hidden; padding:0 32px;
+    transition:max-height .3s ease, padding .3s ease;
+  }
+  .qf-nav.open{ max-height:400px; padding:16px 32px 24px; }
+  .qf-nav a{ padding:10px 0; width:100%; }
+  .logo-slot-wrap{ display:none; }
+}
+
+/* ===== page hero (title band) ===== */
+.page-hero{
+  padding:160px 32px 70px;
+  text-align:center;
+  background:linear-gradient(160deg, var(--violet-deep) 0%, var(--violet) 100%);
+  color:#fff;
+}
+.page-hero .eyebrow{ color:#ffd9ec; justify-content:center; }
+.page-hero .eyebrow::before{ background:#ffd9ec; }
+.page-hero h1{ color:#fff; font-size:clamp(1.9rem,4vw,2.8rem); margin-top:.5rem; }
+.page-hero p{ color:#e9e3fb; max-width:600px; margin:14px auto 0; font-size:1.02rem; }
+
+/* ===== generic section + card helpers ===== */
+.qf-section{ padding:5rem 0; }
+.qf-rounded{ border-radius:24px !important; }
+
+.bg-section{ position:relative; overflow:hidden; isolation:isolate; }
+.bg-section .section-bg-img{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; }
+.bg-section .section-veil{
+  position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(180deg, rgba(221,227,251,.85) 0%, rgba(221,227,251,.94) 100%);
+}
+.bg-section.alt-surface{ background:var(--bg-soft); }
+.section-py{ padding-top:6.5rem; padding-bottom:6.5rem; }
+@media(max-width:576px){ .section-py{ padding-top:4rem; padding-bottom:4rem; } }
+
+.align-center .section-copy{ margin-left:auto; margin-right:auto; text-align:center; }
+.align-center .eyebrow{ justify-content:center; }
+
+.section-copy{
+  background:rgba(255,255,255,.86); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line); border-radius:24px; padding:2.4rem clamp(22px,4vw,46px);
+  box-shadow:0 20px 46px rgba(45,27,84,.14); max-width:620px;
+}
+
+.gate-mark{ width:40px; height:40px; border-radius:50%; overflow:hidden; box-shadow:0 6px 16px rgba(45,27,84,.2); }
+
+.card-fest{
+  border:1px solid var(--line); border-radius:18px; padding:1.6rem; background:#fff; height:100%;
+  transition:border-color .2s, transform .2s, box-shadow .2s;
+}
+.card-fest:hover{ border-color:var(--violet-pale); transform:translateY(-4px); box-shadow:0 16px 34px rgba(45,27,84,.1); }
+.card-fest .tag{ font-family:'IBM Plex Mono',monospace; font-size:.68rem; color:var(--pink-deep); font-weight:500; }
+.card-fest h3{ font-size:1.05rem; }
+.card-fest p{ color:var(--ink-soft); font-size:.92rem; margin-bottom:0; }
+
+.payment-qr{ display:flex; justify-content:center; align-items:center; margin-top:12px; }
+.payment-qr img{ width:180px; height:180px; object-fit:contain; }
+
+.link-fest{
+  font-family:'IBM Plex Mono',monospace; font-size:.85rem; color:#fff; font-weight:600;
+  display:inline-flex; align-items:center; gap:8px;
+  background:linear-gradient(135deg, #ff2d95, #7c3aed); border:none; border-radius:8px;
+  padding:10px 18px; text-decoration:none; cursor:pointer;
+  box-shadow:0 4px 12px rgba(255,45,149,.3); transition:all .2s ease;
+}
+.link-fest:hover{
+  gap:12px; transform:translateY(-2px); box-shadow:0 6px 18px rgba(255,45,149,.45);
+  background:linear-gradient(135deg, #ff4dab, #8b5cf6);
+}
+
+/* fade-in elements render visible by default on this page
+   (no IntersectionObserver script here) */
+.fade-in{ opacity:1; transform:none; }
+
+/* ===== footer ===== */
+footer{
+  text-align:center; padding:3rem 0;
+  background:var(--bg-soft); border-top:1px solid var(--line);
+}
+.footer-logos{ display:flex; justify-content:center; align-items:center; gap:16px; margin-bottom:12px; }
+.footer-badge, .footer-gitam-slot{ width:56px; height:56px; border-radius:50%; overflow:hidden; }
+.footer-badge img, .footer-gitam-slot img{ width:100%; height:100%; object-fit:cover; }
+footer p{ font-family:'IBM Plex Mono',monospace; color:var(--ink-soft); font-size:.75rem; margin:0; }
+</style>
 <link rel="stylesheet" href="css/site.css">
   <link rel="icon" type="image/png" href="assets/badge-dark.png">
 
